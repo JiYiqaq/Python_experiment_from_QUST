@@ -1,3 +1,4 @@
+import time
 products=[("鸡蛋",1),("牛奶",2),("苹果",2),("香蕉",3)]
 shopping_list=[]
 money=float(input("请输入您的购物资金:"))
@@ -18,8 +19,11 @@ while True:
                 print("购买成功!")
             else:
                 print("您的余额不足!")
+                time.sleep(2)
         else:
-                print("您购买的商品不存在!")
+            print("您购买的商品不存在!")
+            time.sleep(2)
+
     elif option=="q":
             print("-"*10,"购物清单","-"*10)
             for i in shopping_list:
