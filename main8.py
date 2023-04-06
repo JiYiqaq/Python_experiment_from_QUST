@@ -1,38 +1,42 @@
-import math
-def is_even(number):
-    """判断一个数是否是偶数"""
-    if number%2 == 0:
-        return True
-    else:
-        return False
-def is_prime(number):
-    """判断一个数是否是素数"""
-    if number < 2:
-        return False
-    sqrt_number = int(math.sqrt(number))
-    for i in range(2,sqrt_number+1):
-        if number % i == 0:
-            return False
-    return True
-def can_split(number):
-    """判断一个数能否分解成两个素数的和，返回一个列表"""
-    equo_list = []
-    for i in range(1,number//2+1):
-        j = number - i
-        if is_prime(i) and is_prime(j):
-            equo_list.append(f"{number}={i}+{j}")
-    if not equo_list:
-        equo_list.append(f"{number}无法分解成两个素数")
-    return equo_list
-if __name__ == "__main__":
-    random_num = input("请输入一个大于5的偶数")
-    if random_num.isdigit():
-        random_num = int(random_num)
-        if random_num > 5 and is_even(random_num):
-            result_list = can_split(random_num)
-            for equo in result_list:
-                print(equo)
-        else:
-            print("输入的数字不符合要求！")
-    else:
-        print("请输入整数！")
+waste_dict = {
+    "可回收垃圾":["玻璃","金属","塑料瓶","纸张","衣服"],
+    "干垃圾":["餐巾纸","塑料袋","纸巾","纸尿裤","花盆","陶瓷"],
+    "湿垃圾":["剩饭剩菜","瓜皮果核","花卉绿植","过期食品"],
+    "有害垃圾":["电池","油漆桶","荧光灯管","废药品"],
+    }
+while True:
+    search_waste = input("请输入您要查询的垃圾：")
+    find = False
+    if search_waste == "q":
+        break
+    for classify,waste in waste_dict.items():
+        if search_waste in waste:
+           find = True
+           print(f"{search_waste}的类别是{classify}")
+           print("-"*30)
+    if find == False:
+        print("没有找到该垃圾的分类，请自行判断")
+        print("-"*30)
+        for classify,waste in waste_dict.items():
+            print(f"{classify}包括：",end="")
+            for item in waste:
+                if waste.index(item) == len(waste) - 1:
+                    print(item)
+                else:
+                    print(item,end="，")
+        print("-" * 30)
+        while True:
+            option = input("您是否希望将此垃圾加入到现有分类中呢(yes/no)？")
+            if option == "yes":
+                classify = input("您希望将垃圾加入到哪个类别？")
+                try:
+                    waste_dict[classify].append(search_waste)
+                except KeyError:
+                    print("您的输入有误，没有此类别")
+                break
+            elif option == "no":
+                print("可以继续查询垃圾分类")
+                break
+            else:
+                print("您的输入有误，请重新输入")
+
