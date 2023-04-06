@@ -25,18 +25,17 @@ while True:
                 else:
                     print(item,end="，")
         print("-" * 30)
-        break
-while True:
-    option = input("您是否希望将此垃圾加入到现有分类中呢(yes/no)？")
-    if option == "yes":
-        classify = input("您希望将垃圾加入到哪个类别？")
-        try:
-            waste_dict[classify].append(search_waste)
-        except KeyError:
-            print("您的输入有误，没有此类别")
-        break
-    elif option == "no":
-        print("可以继续查询垃圾分类")
-        break
-    else:
-        print("您的输入有误，请重新输入")
+        while True:
+            option = input("您是否希望将此垃圾加入到现有分类中呢(yes/no)？")
+            if option == "yes":
+                classify = input("您希望将垃圾加入到哪个类别？")
+                try:
+                    waste_dict[classify].append(search_waste)
+                except KeyError:
+                    print("您的输入有误，没有此类别")
+                break
+            elif option == "no":
+                print("可以继续查询垃圾分类")
+                break
+            else:
+                print("您的输入有误，请重新输入")
